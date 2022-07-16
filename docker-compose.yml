@@ -24,7 +24,7 @@ services:
       - propdb
       - rabbitmq
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://userdb:5432/emlakilan_property
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://propdb:5432/emlakilan_property
       - SPRING_DATASOURCE_USERNAME=emlakilan_property
       - SPRING_DATASOURCE_PASSWORD=morveotesi
   
