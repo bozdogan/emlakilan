@@ -1,0 +1,65 @@
+version: "3"
+services:
+  userservice:
+    image: emlakilan_userservice
+    build:
+     context: ./userservice
+    ports:
+      - "3001:8080"
+    depends_on:
+      - userdb
+      - rabbitmq
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://userdb:5432/emlakilan_user
+      - SPRING_DATASOURCE_USERNAME=emlakilan_user
+      - SPRING_DATASOURCE_PASSWORD=morveotesi
+  
+  propertyservice:
+    image: emlakilan_propertyservice
+    build:
+     context: ./propertyservice
+    ports:
+      - "3002:8080"
+    depends_on:
+      - propdb
+      - rabbitmq
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://userdb:5432/emlakilan_property
+      - SPRING_DATASOURCE_USERNAME=emlakilan_property
+      - SPRING_DATASOURCE_PASSWORD=morveotesi
+  
+  reportservice:
+    image: emlakilan_reportservice
+    build:
+     context: ./reportservice
+    ports:
+      - "3002:8080"
+    depends_on:
+      - propdb
+      - rabbitmq
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://propdb:5432/emlakilan_property
+      - SPRING_DATASOURCE_USERNAME=emlakilan_property
+      - SPRING_DATASOURCE_PASSWORD=morveotesi
+
+  userdb:
+    image: "postgres:14.4-alpine"
+    ports:
+      - "5401:5432"
+    environment:
+      - POSTGRES_USER=emlakilan_user
+      - POSTGRES_PASSWORD=morveotesi
+
+  propdb:
+    image: "postgres:14.4-alpine"
+    ports:
+      - "5402:5432"
+    environment:
+      - POSTGRES_USER=emlakilan_property
+      - POSTGRES_PASSWORD=morveotesi
+
+  rabbitmq:
+    image: "rabbitmq:3.10-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
