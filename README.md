@@ -31,3 +31,19 @@ User entity fields:
 - `POST /login` generates a JWT if authentication is successful
 - `POST /register` creates new user
 
+
+
+## PropertyService
+
+Checks JWT provided in `Authentication` header before doing any operation (except `GET /properties`)
+
+Property entity fields:  
+- authorId: Long
+- dateCreated: LocalDate
+- dateModified: LocalDate
+- status: enum('PENDING', 'ACCEPTED', 'REJECTED')
+- title: String
+- description: String `TEXT`
+- imagePath: String
+
+
