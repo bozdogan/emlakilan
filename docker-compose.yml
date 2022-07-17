@@ -27,20 +27,22 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://propdb:5432/emlakilan_property
       - SPRING_DATASOURCE_USERNAME=emlakilan_property
       - SPRING_DATASOURCE_PASSWORD=morveotesi
+      - SPRING_RABBITMQ_HOST=rabbitmq
   
   reportservice:
     image: emlakilan_reportservice
     build:
      context: ./reportservice
     ports:
-      - "3002:8080"
+      - "3003:8080"
     depends_on:
-      - propdb
+      - reportdb
       - rabbitmq
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://propdb:5432/emlakilan_property
-      - SPRING_DATASOURCE_USERNAME=emlakilan_property
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://propdb:5432/emlakilan_report
+      - SPRING_DATASOURCE_USERNAME=emlakilan_report
       - SPRING_DATASOURCE_PASSWORD=morveotesi
+      - SPRING_RABBITMQ_HOST=rabbitmq
 
   userdb:
     image: "postgres:14.4-alpine"
@@ -56,6 +58,14 @@ services:
       - "5402:5432"
     environment:
       - POSTGRES_USER=emlakilan_property
+      - POSTGRES_PASSWORD=morveotesi
+
+  reportdb:
+    image: "postgres:14.4-alpine"
+    ports:
+      - "5403:5432"
+    environment:
+      - POSTGRES_USER=emlakilan_report
       - POSTGRES_PASSWORD=morveotesi
 
   rabbitmq:
