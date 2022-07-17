@@ -1,5 +1,16 @@
+# Emlak Ilan Sistemi
+
+A web application for posting real estate ads.
+
+**Tech Stack**:
+
+- Java 11
+- Spring Web
+- PostgreSQL
+
 
 ## UserService
+[repository](https://github.com/bozdogan/emlakilan_userservice)
 
 NOTE: Once registered, User cannot change their username.
 
@@ -25,6 +36,7 @@ User entity fields:
 
 
 ## PropertyService
+[repository](https://github.com/bozdogan/emlakilan_propertyservice)
 
 Checks JWT provided in `Authentication` header before doing any operation
 
@@ -53,4 +65,19 @@ Property entity fields:
 - <small>*ADMIN*</small> `GET /api/list-rejected`
 - <small>*ADMIN*</small> `GET /api/accept/:id`
 - <small>*ADMIN*</small> `GET /api/reject/:id`
+
+
+
+## ReportService
+[repository](https://github.com/bozdogan/emlakilan_reportservice)
+
+Creates reports for property ads. Report contains a message such as "The ad with id {POST_ID} created by {AUTHOR} {ELAPSED_TIME} ago. It is viewed {VIEW_COUNT} times.".
+
+
+### API Endpoints
+- `GET /api/report/:id` shows report for an ad
+- `GET /api/report/:id` triggers to update report for an ad
+
+
+
 

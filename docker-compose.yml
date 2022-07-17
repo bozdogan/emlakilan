@@ -39,7 +39,7 @@ services:
       - reportdb
       - rabbitmq
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://propdb:5432/emlakilan_report
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://reportdb:5432/emlakilan_report
       - SPRING_DATASOURCE_USERNAME=emlakilan_report
       - SPRING_DATASOURCE_PASSWORD=morveotesi
       - SPRING_RABBITMQ_HOST=rabbitmq
